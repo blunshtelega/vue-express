@@ -1,0 +1,29 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+model Category {
+    id           Int       @default(autoincrement()) @id
+    title        String?   @unique @default("Default category title")
+    description  String
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @default(now())
+    productsList Products[]
+}
+
+model Products {
+    id          Int      @default(autoincrement()) @id
+    title       String?  @default("Default product title")
+    description String?  @default("Default product description")
+    price       Int?     @default(666)
+    image       String?  @default("https://dummyimage.com/100x100/6f5be3/FFFFFF&text=Random+Image")
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now())
+    category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade) 
+    categoryId  Int?
+}
