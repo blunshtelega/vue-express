@@ -18,7 +18,7 @@
 
 <script>
     export default {
-        name: "common-modal",
+        name: "bootstrap-modal",
     }
 </script>
 

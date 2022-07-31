@@ -1,4 +1,3 @@
-import { ICategory } from './../models/category.model';
 import { createCategory, deleteCategory, getCategory, updateCategory } from './../services/category.service';
 import { NextFunction, Request, Response, Router } from 'express';
 import { getAllCategories } from '../services/category.service';
@@ -11,7 +10,7 @@ const router = Router();
  * @returns List of all categories
  */
 
-router.get('/categories', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.get('/categories', async (req: Request, res: Response, next: NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods', 'GET,POST");
@@ -92,7 +91,6 @@ router.put(
     '/categories/:id',
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log(req.body)
             const category = await updateCategory(req.body, req.params.id);
             res.json(category);
         } catch (error) {   

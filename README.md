@@ -1,24 +1,27 @@
-# test
-
-## Project setup
+## Установка
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Запускаем docker
+```
+docker-compose up -d
+```
+
+## Prisma
+```
+npx prisma migrate dev
+```
+
+## Заполнить базовые категории
+```
+npx prisma db seed
+```
+
+### Start vue and backend
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
 ```
-npm run build
+npm run dev:server
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -25,7 +25,6 @@ export const createCategory = async (categoryData: ICategory) => {
 };
 
 export const getCategory = async (id: string) => {
-    console.log('Id Category', id, typeof id)
     const category = await prisma.category.findUnique({
         where: { id: Number(id) },
     })

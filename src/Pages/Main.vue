@@ -1,38 +1,41 @@
 <template>
     <div class="container-fluid">
+        <!-- Boostrap button for modal view + Bootstrap modal + AddProductForm -->
         <div class="custom-wrapper">
             <modal-button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Добавить новый продукт
             </modal-button>
         </div>
-        <common-modal>
-            <product-form
+        <bootstrap-modal>
+            <add-product-form
                 @create="createProduct"
                 :categories="categories"
             />
-        </common-modal>
+        </bootstrap-modal>
+        <!-- Categories list -->
         <div class="custom-wrapper">
             <category-list
                 :categories="categories"
             />    
         </div>
+        <!-- Products list -->        
         <div class="custom-wrapper">
             <product-list
                 :products="products"
+                :categories="categories"
             />
         </div>
     </div>
-
 </template>
 
 <script>
     import CategoryList from '@/Components/Category/CategoryList.vue'
     import ProductList from '@/Components/Product/ProductList.vue'
-    import ProductForm from '@/Components/Forms/ProductForm.vue'
+    import AddProductForm from '@/Components/Forms/AddProductForm.vue'
     import axios from 'axios'
     export default {
         components: {
-            CategoryList, ProductList, ProductForm
+            CategoryList, ProductList, AddProductForm
         },
         data() {
             return {
@@ -45,14 +48,11 @@
                 this.products.push(product)
             },
             async fetchCategories() {
-                this.isLoading = true;
                 try{
                     const response = await axios.get('http://localhost:3000/api/categories')
                     this.categories = response.data;
                 } catch (error){
                     console.log(error)
-                } finally {
-                    this.isLoading = false
                 }
             },
             async fetchProducts() {
@@ -69,7 +69,6 @@
             this.fetchProducts();
         },
     }
-
 </script>
 
 <style scoped>

@@ -37,8 +37,9 @@ export const createProduct = async (productData: IInputProduct, image: IFileUplo
 };
 
 //Вариант без деструктуризации объекта
-export const updateProduct = async (productData: Product, id: string) => {
+export const updateProduct = async (productData: Product, id: string, image: IFileUpload) => {
     const existingCategory = await getCategoryByName(productData.category as string)
+    const imagePath = 'public/' + image.filename
     const updatedProduct = await prisma.products.update({
         where: {
             id: Number(id),
@@ -46,8 +47,8 @@ export const updateProduct = async (productData: Product, id: string) => {
         data: {
             ...(productData.title ? { title: productData.title } : {}),
             ...(productData.description ? { description: productData.description } : {}),
-            ...(productData.price ? { price: productData.price } : {}),
-            ...(productData.image ? { image: productData.image } : {}),
+            ...(productData.price ? { price: Number(productData.price) } : {}),
+            ...(imagePath ? { image: imagePath } : {}),
             categoryId: existingCategory?.id,
             updatedAt: new Date(),
         }

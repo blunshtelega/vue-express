@@ -5,8 +5,8 @@
             <product-item 
                 v-for="product in products"
                 :product="product"
+                :categories="categories"
                 :key="product.id"
-                @showModal="$emit('showModal', product)"
             />
         </div>
     </div>
@@ -23,7 +23,11 @@
             products: {
                 type: Array,
                 required: true,
-            }
+            },
+            categories: {
+                type: Array,
+                required: true,
+            }      
         }
     }
 </script>

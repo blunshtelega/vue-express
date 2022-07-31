@@ -90,10 +90,15 @@ router.post('/products', upload.single('image'), async (req: any, res: Response,
 
 router.put(
     '/products/:id',
-    async (req: Request, res: Response, next: NextFunction) => {
+    upload.single('image'),
+    async (req: any, res: Response, next: NextFunction) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.header("Access-Control-Allow-Methods', 'GET,POST,PUT");
         try {
-            const product = await updateProduct(req.body, req.params.id);
+            const product = await updateProduct(req.body, req.params.id, req.file);
             res.json(product);
+            return product
         } catch (error) {   
             next(error);
         }

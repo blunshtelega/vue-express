@@ -8,6 +8,9 @@
     "lint": "vue-cli-service lint",
     "dev:server": "nodemon --config ./nodemon.config.json"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^4.1.0",
     "axios": "^0.27.2",
